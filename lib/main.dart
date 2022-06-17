@@ -40,12 +40,6 @@ class MQTTClientWrapper {
 Future<MqttServerClient> connect() async {
   MqttServerClient client = MqttServerClient.withPort(
       'broker.loranet.my', 'kakashi', 1883); //(broker,clientID,port)
-//  const pubTopic = 'topic/dobifm';
-//  final builder = MqttClientPayloadBuilder();
-//  builder.addString('Hello MQTT');
-//  client.logging(on: true);
-//  client.subscribe("topic/dobifm", MqttQos.atLeastOnce);
-//  client.publishMessage(pubTopic, MqttQos.atLeastOnce, builder.payload);
   client.onConnected = onConnected;
   client.onDisconnected = onDisconnected;
   client.onUnsubscribed = onUnsubscribed as UnsubscribeCallback?;
@@ -60,7 +54,7 @@ Future<MqttServerClient> connect() async {
     const pubTopic = 'topic/dobifm';
     final builder = MqttClientPayloadBuilder();
     builder.addString('Hello Mqtt');
-    client.publishMessage(pubTopic, MqttQos.atLeastOnce, builder.payload);
+    client.publishMessage(pubTopic, MqttQos.atLeastOnce, builder.payload as Uint8Buffer);
     // At this point, we are certain that the value isn't null so we can assign it anywhere inside the scope of our if block.
   }
 
